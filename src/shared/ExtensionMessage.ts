@@ -143,6 +143,7 @@ export interface ExtensionState {
 	localClineRulesToggles: ClineRulesToggles
 	localCursorRulesToggles: ClineRulesToggles
 	localWindsurfRulesToggles: ClineRulesToggles
+	salesforceApiKey?: string
 }
 
 export interface ClineMessage {

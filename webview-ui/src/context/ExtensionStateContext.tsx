@@ -169,6 +169,7 @@ export const ExtensionStateContextProvider: React.FC<{
 			{},
 			{
 				onResponse: (response) => {
+					debugger
 					console.log("[DEBUG] got state update via subscription", response)
 					if (response.stateJson) {
 						try {
@@ -212,9 +213,11 @@ export const ExtensionStateContextProvider: React.FC<{
 											config.asksageApiKey,
 											config.xaiApiKey,
 											config.sambanovaApiKey,
+											config.salesforceApiKey,
 										].some((key) => key !== undefined)
 									: false
 
+								debugger
 								setShowWelcome(!hasKey)
 								setDidHydrateState(true)
 

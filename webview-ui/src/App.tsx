@@ -31,7 +31,9 @@ const AppContent = () => {
 			const message: ExtensionMessage = e.data
 			switch (message.type) {
 				case "action":
+					debugger
 					switch (message.action!) {
+						
 						case "settingsButtonClicked":
 							setShowSettings(true)
 							setShowHistory(false)

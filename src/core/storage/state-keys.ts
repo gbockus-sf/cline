@@ -20,6 +20,7 @@ export type SecretKey =
 	| "asksageApiKey"
 	| "xaiApiKey"
 	| "sambanovaApiKey"
+	| "salesforceApiKey"
 
 export type GlobalStateKey =
 	| "apiProvider"

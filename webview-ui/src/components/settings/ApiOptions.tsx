@@ -51,6 +51,8 @@ import {
 	doubaoModels,
 	doubaoDefaultModelId,
 	liteLlmModelInfoSaneDefaults,
+	salesforceModels,
+	salesforceDefaultModelId,
 } from "@shared/api"
 import { ExtensionMessage } from "@shared/ExtensionMessage"
 import { useExtensionState } from "@/context/ExtensionStateContext"
@@ -326,6 +328,7 @@ const ApiOptions = ({
 					<VSCodeOption value="asksage">AskSage</VSCodeOption>
 					<VSCodeOption value="xai">xAI</VSCodeOption>
 					<VSCodeOption value="sambanova">SambaNova</VSCodeOption>
+					<VSCodeOption value="salesforce">Salesforce</VSCodeOption>
 				</VSCodeDropdown>
 			</DropdownContainer>
 
@@ -1953,6 +1956,44 @@ const ApiOptions = ({
 				</div>
 			)}
 
+			{selectedProvider === "salesforce" && (
+				<div>
+					<VSCodeTextField
+						value={apiConfiguration?.salesforceApiKey || ""}
+						style={{ width: "100%" }}
+						type="password"
+						onInput={handleInputChange("salesforceApiKey")}
+						placeholder="Enter API Key...">
+						<span style={{ fontWeight: 500 }}>Salesforce API Key</span>
+					</VSCodeTextField>
+					<p
+						style={{
+							fontSize: "12px",
+							marginTop: 3,
+							color: "var(--vscode-descriptionForeground)",
+						}}>
+						This key is stored locally and only used to make API requests from this extension.
+						{!apiConfiguration?.salesforceApiKey && (
+							<VSCodeLink
+								href="https://developer.salesforce.com/signup"
+								style={{
+									display: "inline",
+									fontSize: "inherit",
+								}}>
+								You can get a Salesforce API key by signing up here.
+							</VSCodeLink>
+						)}
+					</p>
+					<ModelInfoView
+						selectedModelId={selectedModelId}
+						modelInfo={selectedModelInfo}
+						isDescriptionExpanded={isDescriptionExpanded}
+						setIsDescriptionExpanded={setIsDescriptionExpanded}
+						isPopup={isPopup}
+					/>
+				</div>
+			)}
+
 			{apiErrorMessage && (
 				<p
 					style={{
@@ -2487,6 +2528,8 @@ export function normalizeApiConfiguration(apiConfiguration?: ApiConfiguration): 
 			return getProviderData(xaiModels, xaiDefaultModelId)
 		case "sambanova":
 			return getProviderData(sambanovaModels, sambanovaDefaultModelId)
+		case "salesforce":
+			return getProviderData(salesforceModels, salesforceDefaultModelId)
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)
 	}

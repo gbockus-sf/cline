@@ -3,10 +3,15 @@ import { describe, it, expect, vi } from "vitest"
 import ApiOptions from "../ApiOptions"
 import { ExtensionStateContextProvider } from "@/context/ExtensionStateContext"
 
+declare global {
+	// eslint-disable-next-line no-var
+	var vscode: { postMessage: (...args: any[]) => void }
+}
+
 vi.mock("../../../context/ExtensionStateContext", async (importOriginal) => {
 	const actual = await importOriginal()
 	return {
-		...(actual || {}),
+		...(actual ?? {}),
 		// your mocked methods
 		useExtensionState: vi.fn(() => ({
 			apiConfiguration: {
@@ -25,7 +30,6 @@ describe("ApiOptions Component", () => {
 	const mockPostMessage = vi.fn()
 
 	beforeEach(() => {
-		//@ts-expect-error - vscode is not defined in the global namespace in test environment
 		global.vscode = { postMessage: mockPostMessage }
 	})
 
@@ -53,7 +57,7 @@ describe("ApiOptions Component", () => {
 vi.mock("../../../context/ExtensionStateContext", async (importOriginal) => {
 	const actual = await importOriginal()
 	return {
-		...(actual || {}),
+		...(actual ?? {}),
 		// your mocked methods
 		useExtensionState: vi.fn(() => ({
 			apiConfiguration: {
@@ -72,7 +76,6 @@ describe("ApiOptions Component", () => {
 	const mockPostMessage = vi.fn()
 
 	beforeEach(() => {
-		//@ts-expect-error - vscode is not defined in the global namespace in test environment
 		global.vscode = { postMessage: mockPostMessage }
 	})
 
@@ -100,7 +103,7 @@ describe("ApiOptions Component", () => {
 vi.mock("../../../context/ExtensionStateContext", async (importOriginal) => {
 	const actual = await importOriginal()
 	return {
-		...(actual || {}),
+		...(actual ?? {}),
 		useExtensionState: vi.fn(() => ({
 			apiConfiguration: {
 				apiProvider: "fireworks",
@@ -167,7 +170,7 @@ describe("ApiOptions Component", () => {
 vi.mock("../../../context/ExtensionStateContext", async (importOriginal) => {
 	const actual = await importOriginal()
 	return {
-		...actual,
+		...(actual ?? {}),
 		// your mocked methods
 		useExtensionState: vi.fn(() => ({
 			apiConfiguration: {
@@ -186,7 +189,6 @@ describe("OpenApiInfoOptions", () => {
 
 	beforeEach(() => {
 		vi.clearAllMocks()
-		//@ts-expect-error - vscode is not defined in the global namespace in test environment
 		global.vscode = { postMessage: mockPostMessage }
 	})
 

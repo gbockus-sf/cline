@@ -23,6 +23,7 @@ export type ApiProvider =
 	| "asksage"
 	| "xai"
 	| "sambanova"
+	| "salesforce"
 
 export interface ApiHandlerOptions {
 	apiModelId?: string
@@ -89,6 +90,7 @@ export interface ApiHandlerOptions {
 	reasoningEffort?: string
 	sambanovaApiKey?: string
 	requestTimeoutMs?: number
+	salesforceApiKey?: string
 }
 
 export type ApiConfiguration = ApiHandlerOptions & {
@@ -1756,3 +1758,19 @@ export const requestyDefaultModelInfo: ModelInfo = {
 	cacheReadsPrice: 0.3,
 	description: "Anthropic's most intelligent model. Highest level of intelligence and capability.",
 }
+
+// Salesforce
+// https://developer.salesforce.com/
+export type SalesforceModelId = keyof typeof salesforceModels
+export const salesforceDefaultModelId: SalesforceModelId = "salesforce-gpt-4"
+export const salesforceModels = {
+	"salesforce-gpt-4": {
+		maxTokens: 8192,
+		contextWindow: 128_000,
+		supportsImages: false,
+		supportsPromptCache: false,
+		inputPrice: 0,
+		outputPrice: 0,
+		description: "Salesforce GPT-4 model (example, update as needed)",
+	},
+} as const satisfies Record<string, ModelInfo>
