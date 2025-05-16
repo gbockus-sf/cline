@@ -24,6 +24,7 @@ import { AskSageHandler } from "./providers/asksage"
 import { XAIHandler } from "./providers/xai"
 import { SambanovaHandler } from "./providers/sambanova"
 import { SalesforceHandler } from "./providers/salesforce"
+import { SalesforceExternalHandler } from "./providers/salesforceExternal"
 
 export interface ApiHandler {
 	createMessage(systemPrompt: string, messages: Anthropic.Messages.MessageParam[]): ApiStream
@@ -84,6 +85,8 @@ export function buildApiHandler(configuration: ApiConfiguration): ApiHandler {
 			return new SambanovaHandler(options)
 		case "salesforce":
 			return new SalesforceHandler(options)
+		case "salesforceExternal":
+			return new SalesforceExternalHandler(options)
 		default:
 			return new AnthropicHandler(options)
 	}

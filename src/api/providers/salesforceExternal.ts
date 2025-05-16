@@ -5,11 +5,12 @@ import { ApiStream, ApiStreamUsageChunk } from "../transform/stream"
 import { LLMServiceInterface, ServiceProvider, ServiceType } from "@salesforce/vscode-service-provider"
 import { convertToOpenAiMessages } from "../transform/openai-format"
 import OpenAI from "openai"
+import { convertToR1Format } from "../transform/r1-format"
 
 const EXTENSION_ID = "com.salesforce.salesforce-vscode-vibing"
 const PROMPT_ID = "12345-67890-12345-98765"
 
-export class SalesforceHandler implements ApiHandler {
+export class SalesforceExternalHandler implements ApiHandler {
 	private options: ApiHandlerOptions
 	salesforceApiKey: string | undefined
 	modelId: string
@@ -19,7 +20,6 @@ export class SalesforceHandler implements ApiHandler {
 		this.options = options
 		this.salesforceApiKey = options.salesforceApiKey
 		this.modelId = "gpt-4o"
-		this.modelId = "qwen"
 		this.loadLLMService()
 	}
 
@@ -30,38 +30,33 @@ export class SalesforceHandler implements ApiHandler {
 	async *createMessage(systemPrompt: string, messages: MessageParam[]): ApiStream {
 		try {
 			// @ts-ignore
-			const apiCLient = this.coreLLMService.getApiClient()
+			const apiCLient = this.coreLLMService.getExternalModelApiClient()
 
 			let openAiMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
 				{ role: "system", content: systemPrompt },
-				// @ts-ignore
-				// { role: "user", content: messages[0].content[0].text}
-				// ...convertToOpenAiMessages(messages),
+				...convertToOpenAiMessages(messages),
 			]
-			for (const message of messages) {
-				// @ts-ignore
-				openAiMessages.push({ role: message.role, content: message.content[0].text })
+			openAiMessages = convertToR1Format([{ role: "user", content: systemPrompt }, ...messages])
+
+			const modelRequest = {
+				promptId: PROMPT_ID,
+				commandSource: "Chat",
+				messages: openAiMessages,
+				maxTokens: 4000,
+				stream: true,
 			}
+			// @ts-ignore
+			const modelConfig = this.coreLLMService.getExternalModelConfig()
+			const stream = await apiCLient.generate(modelRequest, [modelConfig])
 
-			const promptString = JSON.stringify(openAiMessages)
-			const stream = await apiCLient.getChatStream(
-				{
-					prompt: promptString,
-					max_tokens: 2000,
-					parameters: {
-						command_source: "Chat",
-					},
-				},
-				PROMPT_ID,
-			)
-
-			for await (const chunk of stream) {
+			for await (const chunk of stream.chunks) {
 				// const delta = chunk.choices[0]?.delta
-				const generation = chunk.data.generations?.[0]
-				if (generation?.text) {
+				// const generation = chunk.data.generations[0];
+				const text = chunk?.generatedText
+				if (text) {
 					yield {
 						type: "text",
-						text: generation.text,
+						text: text,
 					}
 				}
 

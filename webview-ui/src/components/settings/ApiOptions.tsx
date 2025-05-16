@@ -329,6 +329,7 @@ const ApiOptions = ({
 					<VSCodeOption value="xai">xAI</VSCodeOption>
 					<VSCodeOption value="sambanova">SambaNova</VSCodeOption>
 					<VSCodeOption value="salesforce">Salesforce</VSCodeOption>
+					<VSCodeOption value="salesforceExternal">Salesforce External</VSCodeOption>
 				</VSCodeDropdown>
 			</DropdownContainer>
 
@@ -2529,6 +2530,8 @@ export function normalizeApiConfiguration(apiConfiguration?: ApiConfiguration): 
 		case "sambanova":
 			return getProviderData(sambanovaModels, sambanovaDefaultModelId)
 		case "salesforce":
+			return getProviderData(salesforceModels, salesforceDefaultModelId)
+		case "salesforceExternal":
 			return getProviderData(salesforceModels, salesforceDefaultModelId)
 		default:
 			return getProviderData(anthropicModels, anthropicDefaultModelId)

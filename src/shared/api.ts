@@ -24,7 +24,7 @@ export type ApiProvider =
 	| "xai"
 	| "sambanova"
 	| "salesforce"
-
+	| "salesforceExternal"
 export interface ApiHandlerOptions {
 	apiModelId?: string
 	apiKey?: string // anthropic
