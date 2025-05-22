@@ -278,11 +278,11 @@
 			"egpt-dev-assistant-outline": {
 				"description": "Agentforce for Developers Icon.",
 				"default": {
-				  "fontPath": "resources/sfdx-icons.woff2",
-				  "fontCharacter": "\\E907"
+					"fontPath": "resources/sfdx-icons.woff2",
+					"fontCharacter": "\\E907"
 				}
-			  }
 			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",

@@ -7,22 +7,22 @@
  *--------------------------------------------------------------------------------------------*/
 
 @font-face {
-  font-family: 'sfdx-icons';
-  font-display: block;
-  src: url('./sfdx-icons.woff2?8a07fcf0b3aefaacc5deb6523fc570e5') format('woff2');
+	font-family: "sfdx-icons";
+	font-display: block;
+	src: url("./sfdx-icons.woff2?8a07fcf0b3aefaacc5deb6523fc570e5") format("woff2");
 }
 
-.sfdx-icon[class*='sfdx-icon-'] {
-  font: normal normal normal 16px/1 sfdx-icons;
-  display: inline-block;
-  text-decoration: none;
-  text-rendering: auto;
-  text-align: center;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+.sfdx-icon[class*="sfdx-icon-"] {
+	font: normal normal normal 16px/1 sfdx-icons;
+	display: inline-block;
+	text-decoration: none;
+	text-rendering: auto;
+	text-align: center;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 /*---------------------
@@ -30,30 +30,30 @@
  *-------------------*/
 
 @keyframes sfdx-icon-spin {
-  100% {
-    transform: rotate(360deg);
-  }
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 .sfdx-icon-sync.sfdx-icon-modifier-spin,
 .sfdx-icon-loading.sfdx-icon-modifier-spin,
 .sfdx-icon-gear.sfdx-icon-modifier-spin {
-  /* Use steps to throttle FPS to reduce CPU usage */
-  animation: sfdx-icon-spin 1.5s steps(30) infinite;
+	/* Use steps to throttle FPS to reduce CPU usage */
+	animation: sfdx-icon-spin 1.5s steps(30) infinite;
 }
 
 .sfdx-icon-modifier-disabled {
-  opacity: 0.5;
+	opacity: 0.5;
 }
 
 .sfdx-icon-modifier-hidden {
-  opacity: 0;
+	opacity: 0;
 }
 
 /* custom speed & easing for loading icon */
 .sfdx-icon-loading {
-  animation-duration: 1s !important;
-  animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;
+	animation-duration: 1s !important;
+	animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;
 }
 
 /*---------------------
@@ -61,68 +61,68 @@
  *-------------------*/
 
 .sfdx-icon-action-accept:before {
-  content: '\e900';
+	content: "\e900";
 }
 .sfdx-icon-action-explain:before {
-  content: '\e901';
+	content: "\e901";
 }
 .sfdx-icon-action-reject:before {
-  content: '\e902';
+	content: "\e902";
 }
 .sfdx-icon-agents-outline:before {
-  content: '\e903';
+	content: "\e903";
 }
 .sfdx-icon-agents:before {
-  content: '\e904';
+	content: "\e904";
 }
 .sfdx-icon-apex:before {
-  content: '\e905';
+	content: "\e905";
 }
 .sfdx-icon-dev-assistant-disabled:before {
-  content: '\e906';
+	content: "\e906";
 }
 .sfdx-icon-dev-assistant-outline:before {
-  content: '\e907';
+	content: "\e907";
 }
 .sfdx-icon-dev-assistant-sleepy:before {
-  content: '\e908';
+	content: "\e908";
 }
 .sfdx-icon-dev-assistant:before {
-  content: '\e909';
+	content: "\e909";
 }
 .sfdx-icon-lightning-outline:before {
-  content: '\e90a';
+	content: "\e90a";
 }
 .sfdx-icon-lightning:before {
-  content: '\e90b';
+	content: "\e90b";
 }
 .sfdx-icon-lwc-optimize:before {
-  content: '\e90c';
+	content: "\e90c";
 }
 .sfdx-icon-salesforce-outline:before {
-  content: '\e90d';
+	content: "\e90d";
 }
 .sfdx-icon-salesforce:before {
-  content: '\e90e';
+	content: "\e90e";
 }
 .sfdx-icon-single-sparkle-outline:before {
-  content: '\e90f';
+	content: "\e90f";
 }
 .sfdx-icon-single-sparkle:before {
-  content: '\e910';
+	content: "\e910";
 }
 .sfdx-icon-test-case-generation:before {
-  content: '\e911';
+	content: "\e911";
 }
 .sfdx-icon-user-avatar:before {
-  content: '\e912';
+	content: "\e912";
 }
 .sfdx-icon-accept:before {
-  content: '\f101';
+	content: "\f101";
 }
 .sfdx-icon-explain:before {
-  content: '\f102';
+	content: "\f102";
 }
 .sfdx-icon-reject:before {
-  content: '\f103';
+	content: "\f103";
 }
